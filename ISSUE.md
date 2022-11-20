@@ -1,4 +1,4 @@
-## POC
+## POC/proof of code
 
 ```yaml
 ---
@@ -52,7 +52,7 @@ imageTag 无过滤内容，可用退格和 rewind （ascii 同理）以及 # 注
 
 ImageTag filters nothing. Using backspace `\b` or rewind `\r` (ascii also works)with comment `#` cheats privileged user to execute.
 
-## 危害与利用方法 
+## 攻击向量与场景/Attack vector and scenario
 
 **首先配置文件本身并没有被项目做权限检查存在可以被其他平级乃至是低权限用户修改的可能。因此提供了一种从文本写入到命令执行的攻击向量。**
 
@@ -70,17 +70,23 @@ Because of the aim of project is completion of production environment toolchains
 
 Another attack scenario is remote delivery and maintenance of users' config file, such as using Nacos unify toolchains and techniques in whole company. Polluting this config file will make computers of developer in office network in danger. (But The Deployment servers and CICD Services is got hacked at that time)
 
-当然命令这里不只是 Open 计算器，由于ImageTag中没有多数的过滤，所以我们几乎可以做任何操作，包括但不限于下载木马文件进行执行，并且由于教程中含有通过环境变量的值的方法传入各种 Token 所以也存在使用 curl 或者其他方法向黑客的恶意 Webhook 服务器发送带有生产或是测试环境的相关的配置从而造成更大的危害。
+当然命令这里不只是 Open 计算器，由于ImageTag中没有多数的过滤，所以我们几乎可以做任何操作，包括但不限于下载木马文件进行执行，并且由于教程中含有通过环境变量的值的方法传入各种 Token 所以也存在使用 curl 或者其他方法向黑客的恶意 Webhook 服务器发送带有生产或是测试环境的相关的配置与口令从而造成更大的危害。
 
-Not only Calc process openning there, Because of ImageTag loose filter, We can do everything not only downloading trojan but also stealing tokens and other config via command like `curl` callback to hackers webhook server.
+Not only Calc process opening there, Because of loose filter in ImageTag , We can do everything not only downloading trojan but also stealing tokens and other config in prod or testing via command like `curl` callback to hackers webhook server.
 
-因此，该 ISSUE 具有一定的（对使用者的）欺骗性质，在权限提升和横向渗透中具有利用空间。
+因此，该 ISSUE 具有一定的对使用者的欺骗性质，并且在权限提升和横向渗透中具有利用空间。
 
-##### TODO
+Consequently, the issue has potentiality of being exploited in order to achieve privilege escalation and lateral movement through the ignorance of user,
+providing a primitive with capability of converting file-written to code execution.
 
-## 可行的缓解与修复
+## 缓解与修复/Mitigation and Fix
 
 可以使用 go client for docker engine 实现。
 
-如果非要使用 exec.Command 可以将第一位二进制参数设置为 docker 替换  sh -c 便会大大降低被注入额外命令的风险
+It is believed that using docker client instead of concat command string is a more safe and elegant implementation.
+
+如果非要使用 `exec.Command` 可以将第一位二进制参数设置为 `docker` 替换  `sh -c` 便会大大降低被注入额外命令的风险
+
+Even if considering keeping `exec.Command`, u should using `docker` to deprecate `sh -c` and put parameters to `args` as well
+so that the risk of causing an command injection will be considerably decreased.
 
