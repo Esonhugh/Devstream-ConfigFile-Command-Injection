@@ -62,6 +62,18 @@ ImageTag filters nothing. Using backspace `\b` or rewind `\r` (ascii also works)
 
 Then, Project uses `docker` `kubectl` which needs root or docker group to exec in many packages. **So, `dtm` is always using with high-privileged user.**
 
+
+为了使得利用场景更加直观，考虑如下命令序列
+
+There is a command-sequence for a more perceptual understanding of scenario mentioned above.
+
+```shell
+su normal_user
+vim ce-config.yml #the owner of this file shall be normal_user
+ls -al | grep ce-config.yml
+sudo dtm apply -f ce-config.yml
+```
+
 由于项目的目的是构造整体的生产环境工具链，也同样聚集了多数最佳实践的配置，同时又支持环境变量或者其他文件读取配置，**所以用户可能并不会对工具配置文件本身亲力亲为。**
 
 Because of the aim of project is completion of production environment toolchains and contains more config with best efforts. Project also allows environment vars or other files to "know" local config. **So user may not put more attention on config files of  tools.**
