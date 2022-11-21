@@ -102,3 +102,7 @@ It is believed that using docker client instead of concat command string is a mo
 Even if considering keeping `exec.Command`, u should using `docker` to deprecate `sh -c` and put parameters to `args` as well
 so that the risk of causing an command injection will be considerably decreased.
 
+## 协作者/cooperator
+
+1. [Esonhugh](https://github.com/Esonhugh)
+2. [Akaany](https://github.com/Akaany)

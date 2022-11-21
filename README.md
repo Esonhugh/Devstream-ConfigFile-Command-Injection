@@ -593,3 +593,8 @@ func buildDockerVolumes(opts *Options) docker.Volumes {
 ## 跟踪信息
 
 1. 该插件的变更于 [第692号拉取请求](https://github.com/devstream-io/devstream/pull/692/commits) 中在 2022 06 21 合并为主分支。并于 06 22，在版本 [0.7.0](https://github.com/devstream-io/devstream/releases/tag/v0.7.0) 中发半 至今 0.9.1 版本中发现。
+
+## 协作者
+
+1. [Esonhugh](https://github.com/Esonhugh)
+2. [Akaany](https://github.com/Akaany)
