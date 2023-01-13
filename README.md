@@ -312,11 +312,11 @@ func ExecInSystem(execPath string, fullCommand string, logsBuffer *bytes.Buffer,
 
 通过跟踪发现调用关系
 
-![截屏2022-11-16 19.52.47](Devstream-Command-injection.assets/截屏2022-11-16 19.52.47.png)
+![截屏2022-11-16 19.52.47](./Devstream-Command-injection.assets/截屏2022-11-16 19.52.47.png)
 
 这里的 ExecInSystemWithParams 函数在文件 [/pkg/utils/docker/dockersh/compose.go](https://github.com/devstream-io/devstream/blob/03decb1084a84aa2fc411c5a50ad8efd46e147b1/pkg/util/docker/dockersh/compose.go#L9) 与 harbordocker 插件中的使用传参基本都不可控制 这里丢弃
 
-![截屏2022-11-16 19.52.26](Devstream-Command-injection.assets/截屏2022-11-16 19.52.26.png)
+![截屏2022-11-16 19.52.26](./Devstream-Command-injection.assets/截屏2022-11-16 19.52.26.png)
 
 ### 拼接过程
 
